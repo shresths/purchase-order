@@ -242,3 +242,13 @@ div.material-table table td:last-child {
 #add_users:hover {
   background-color: #757575;
 }
+
+.modal {
+  height: 100% !important;
+  width: 85% !important;
+}
+
+button {
+  margin: 10px;
+}
+
