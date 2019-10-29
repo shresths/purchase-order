@@ -1,6 +1,55 @@
   purchase_order_list = []
+  warehouse_object = {}
+  product_object = []
+
+  function fetchWarehouseNames() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/warehouse",
+        success: function(data) {
+          console.log("success", data['result']);
+          warehouse_object = data['result'];
+          let warehouse_name_object = {};
+          for (let i in data['result']) {
+            console.log("data", data['result'][i].warehouse_name)
+            let warehouse = data['result'][i].warehouse_name;
+            warehouse_name_object[warehouse] = null;
+          }
+          console.log("Object", warehouse_name_object);
+          $('#warehouse_name').autocomplete({
+            data: warehouse_name_object
+          });
+        },
+        dataType: 'json'
+      });
+  };
+
+  function fetchProductId() {
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:3000/product",
+      success: function(data) {
+        console.log("product success", data['result']);
+        product_object = data['result'];
+        let product_name_object = {};
+        for (let i in data['result']) {
+          console.log("data", data['result'][i].product_id)
+          let product = data['result'][i].product_id;
+          product_name_object[product] = null;
+        }
+        console.log("Object", product_name_object);
+        $('#product_id').autocomplete({
+          data: product_name_object
+        });
+      },
+      dataType: 'json'
+    });
+  }
   
   $(document).ready(function(){
+
+    fetchWarehouseNames();
+    fetchProductId();
 
     $('.modal').modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
@@ -18,14 +67,6 @@
     );
  
     $('.datepicker').datepicker();
-    
-    $('#warehouse_name').autocomplete({
-      data: {
-        "Apple": null,
-        "Microsoft": null,
-        "Google": 'https://placehold.it/250x250'
-      },
-    });
 
     $("#submit_row").click(function() {
       console.log("Clicked", $("#expiry_date").val(), $("#quantity").val(), $("#product_id").val());
@@ -60,7 +101,7 @@
       let data = {"purchase_order": purchase_order_list};
       $.ajax({
         type: "POST",
-        url: "http://localhost:3000/users",
+        url: "http://localhost:3000/warehouseIds",
         data: data,
         success: function() {
           console.log("success")
