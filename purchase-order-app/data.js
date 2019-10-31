@@ -71,12 +71,18 @@
     $("#submit_row").click(function() {
       console.log("Clicked", $("#expiry_date").val(), $("#quantity").val(), $("#product_id").val());
       console.log($("#batch_id").val(), $("#warehouse_name").val());
+      let warehouse_id = findWarehouseId($("#warehouse_name").val());
       let purchase_order = {
-        "warehouse_name": $("#warehouse_name").val(),
-        "batch_id": $("#batch_id").val(),
-        "product_id": $("#product_id").val(),
-        "quanity": $("#quantity").val(),
-        "expiry_date": $("#expiry_date").val()
+        "product_id": parseInt($("#product_id").val()),
+        "quantity": parseInt($("#quantity").val()),
+        "warehouse_id": warehouse_id
+      }
+      for(i in purchase_order) {
+        if(purchase_order[i] === null || purchase_order[i] === "" || purchase_order[i] === undefined)
+        {
+          M.toast({html: "Please insert valid fields"});
+          return false;
+        }
       }
 
       console.log("purchase_order", purchase_order)
@@ -85,11 +91,17 @@
                                     <td>${$("#batch_id").val()}</td>
                                     <td>${$("#product_id").val()}</td>
                                     <td>${$("#quantity").val()}</td>
+                                    <td>${$("#total_cost").val()}</td>
                                     <td>${$("#expiry_date").val()}</td>
                                     </tr>`;
 
       $("#datatable tbody").append(new_purchase_row_html);
+      if("#datatable tbody tr .odd") {
+        console.log("YES");
+        $(".odd").remove();
+      }
       purchase_order_list.push(purchase_order);
+      $("input").val("");
     });
 
     $("#submit_order").click(function() {
@@ -98,16 +110,31 @@
     });
 
     function addProductsToDb(purchase_order_list) {
-      let data = {"purchase_order": purchase_order_list};
+      let data = {"data": purchase_order_list};
+      console.log("final shoot", data);
+      
       $.ajax({
         type: "POST",
-        url: "http://localhost:3000/warehouseIds",
-        data: data,
+        url: "http://localhost:3000/order",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(data),
         success: function() {
-          console.log("success")
-        },
-        dataType: 'json'
+          console.log("success");
+          M.toast({html: "Purchase Order Submitted"});
+          location.reload();
+        }
       });
     }
 
   });
+
+  function findWarehouseId(name) {
+    console.log("warehouse", warehouse_object);
+    for (i in warehouse_object) {
+      if(name == warehouse_object[i].warehouse_name)
+      {
+        return warehouse_object[i].warehouse_id;
+      }
+    }
+  };

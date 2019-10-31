@@ -2,9 +2,10 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Login Materialize</title>
+  <title>Login</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <!--<link rel="stylesheet" href="./style.css">-->
 
 <style>
@@ -26,20 +27,20 @@
                        <form>
                           <div class="row">
                              <div class="input-field col s12">
-                                <input placeholder="name@email.com" id="firstname" type="text" class="validate">
-                                <label for="firstname" class="active">Email</label>
+                                <input placeholder="name@email.com" id="email" type="text" class="validate">
+                                <label for="email" class="active">Email</label>
                              </div>
                           </div>
                           <div class="row">
                              <div class="input-field col s12">
-                                <input placeholder="Password" id="lastname" type="text" class="validate">
-                                <label for="lastname" class="active">Password</label>
+                                <input placeholder="Password" id="password" type="password" class="validate">
+                                <label for="password" class="active">Password</label>
                              </div>
                           </div>
                        </form>
                     </div>
                     <div class="card-action">
-                       <input type="submit" class="btn" value="Login">
+                       <input id="login" type="submit" class="btn" value="Login">
                     </div>
                  </div>
               </div>
@@ -49,5 +50,6 @@
 </div>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script  src="./login.js"></script>
 </body>
 </html>

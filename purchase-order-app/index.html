@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Material Sortable Datatable</title>
+  <title>Datatable</title>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css'>-->
@@ -17,7 +17,7 @@
       <div class="table-header">
         <span class="table-title">Purchase Order Table</span>
         <div class="actions">
-          <a href="#add_order" class="modal-trigger waves-effect btn-flat"><i id="new_order_icon" class="material-icons">person_add</i>
+          <a href="#add_order" class="modal-trigger waves-effect btn-flat"><i id="new_order_icon" class="material-icons">add</i>
             Add New Row
           </a>
           <a href="#" class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
@@ -35,21 +35,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Silver Sun Wares</td>
-            <td>123456</td>
-            <td>32fg-28329-98000</td>
-            <td>60</td>
-            <td>30000</td>
-            <td>23/05/2021</td>
-          </tr>
         </tbody>
       </table>
     </div>
     <div class="row">
       <span>
-        <button class="waves-effect btn col s3 offset-s3">Add New Row</button>
-        <button class="waves-effect btn col s3" id="submit_order">Submit Purchase Order</button>
+        <button class="waves-effect btn col s4 offset-s4" id="submit_order">Submit Purchase Order</button>
       </span>
 
     </div>
